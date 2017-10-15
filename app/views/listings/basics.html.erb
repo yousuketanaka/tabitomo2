@@ -1,0 +1,63 @@
+<%= render 'partial/navbar' %>
+<div class="container">
+    <div class="row row-space">
+        <div class="col-md-3">
+            <!-- vertical-navbar -->
+            <%= render 'partial/verticalnavbar' %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                  <div class="text-center">
+                      <span style="font-size:24px;">基本データの編集</span>
+                  </div>
+              </div>
+
+              <div class="panel-body">
+                  <!-- ここからフォーム -->
+					<%= form_for @listing do |f| %>
+						<div class="row">
+							<div class="col-md-12 select">
+								<div class="form-group">
+									<label><span class="glyphicon glyphicon-triangle-right">居住国</label><br>
+									<%= f.country_select :residentcountry, options_for_select(""), {}, { autofocus: 'true', class: 'form-control'} %>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12 select">
+								<div class="form-group">
+									<label><span class="glyphicon glyphicon-triangle-right">居住都市</label><br>
+									<%= f.text_field :residentcity, autofocus: true, :placeholder => "使用できる言語を1つ書いてください。", :class => 'form-control' %>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12 select">
+								<div class="form-group">
+									<label><span class="glyphicon glyphicon-triangle-right">使用できる言語</label>
+									<%= f.text_field :language, autofocus: true, :placeholder => "使用できる言語を1つ書いてください。", :class => 'form-control' %>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12 select">
+								<div class="form-group">
+									<label><span class="glyphicon glyphicon-triangle-right">言語のレベル</label>
+									<%= f.select :language_level, [["母国語レベル","母国語レベル"], ["ビジネスレベル","ビジネスレベル"], ["日常会話レベル","日常会話レベル"], ["初級レベル","初級レベル"]], {prompt:"選択してください"}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="actions">
+							<%= f.submit "保存", class: "btn btn-danger" %>
+						</div>
+					<% end %>
+              </div>
+          </div>
+      　</div>
+    </div>
+</div>

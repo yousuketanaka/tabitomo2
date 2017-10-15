@@ -1,0 +1,158 @@
+<%= render 'partial/navbar' %>
+
+<!-- ジャンボトロン -->
+<div class="row-space-0">
+    <div class="top-photo-image">
+        <% if @photos %>
+            <% @photos.each_with_index do |photo,i| %>
+               <% if i == 0 %>
+                  <%= image_tag photo.image.url() %>
+               <% end %>
+            <% end %>
+        <% end %>
+    </div>
+</div>
+
+<!-- サマリー -->
+<div class="container-fluid container-listing-show">
+    <div class="container">
+        <div class="listing-summary row-space-3 row-space-top-3">
+            <div class="row">
+                <div class="col-md-3 text-center row-space-2">
+
+                    <h5><%= @listing.user.name %></h5>
+                </div>
+                <div class="col-md-6">
+                    <div class="listing-title" style="font-size:24px;">
+
+                    </div>
+                    <div class="row row-space-top-4">
+                        <div class="col-sm-3 col-xs-3 text-center">
+                            <i class="fa fa-home fa-3x"></i>
+                            <h5><%= @listing.residentcountry %></h5>
+                        </div>
+                        <div class="col-sm-3 col-xs-3 text-center">
+                            <i class="fa fa-linux fa-3x" aria-hidden="true"></i>
+                            <h5><%= @listing.residentcity %></h5>
+                        </div>
+                        <div class="col-sm-3 col-xs-3 text-center">
+                            <i class="fa fa-clock-o fa-3x" aria-hidden="true"></i>
+                            <h5><%= @listing.language %></h5>
+                        </div>
+                        <div class="col-sm-3 col-xs-3 text-center">
+                            <i class="fa fa-bug fa-3x" aria-hidden="true"></i>
+                            <h5><%= @listing.language_level %></h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!--予約フォーム-->
+                <div class="col-md-3">
+                    <div class="panel panel-default panel-show">
+                        <div class="panel-heading">
+                            <span style="font-size:16px;"><%= @listing.price_setting %>円（一サービスあたり）</span>
+                        </div>
+
+                        <div class="panel-body panel-real">
+
+                        </div>
+                    </div>
+                </div><!--予約フォーム col-md-3-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- メインコンテント -->
+<div class="show-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 s-page">
+                <div class="self-info-part">
+                    <h2 class="row-space-3 double-line"><span class="plan-title"><%= @listing.plan_title %></span></h2>
+                    <br>
+                    <h4><span class="title-line"><%= fa_icon "plane", text: "プランの詳細", left: true %></span></h4>
+                    <p class="description-space"><%= @listing.plan_detail %></p>
+                    <p class="description-space"><span class="meethere"><%= link_to "Click here! こんなお店でお会いしましょう。", @listing.shop_info %></span></p>
+                    <h4><span class="title-line"><%= fa_icon "plane", text: "イメージ画像", left: true %></span></h4>
+                      <ul class="bxslider">
+                          <% if @photos %>
+                            <% @photos.each do |photo| %>
+                              <li class="item <%= 'active' if photo.id == @photos[0].id %>">
+                                  <%= image_tag photo.image.url() %>
+                              </li>
+                            <% end %>
+                          <% end %>
+                        </ul>
+                    <br>
+                    <h4><span class="title-line"><%= fa_icon "plane", text: "説明", left: true %></span></h4>
+                    <div class="description_table">
+                        <table class="table table-bordered">
+                          <tbody>
+                              <% if @listing.guide_detail %>
+                                  <tr>
+                                      <td class="table-title">ガイド詳細</td>
+                                      <td class="table-detail"><%= @listing.guide_detail %>時間</td>
+                                  </tr>
+                              <% end %>
+                              <tr>
+                                  <td class="table-title">最大受け入れ人数</td>
+                                  <td class="table-detail"><%= @listing.acceptable %>名</td>
+                              </tr>
+                              <tr>
+                                  <td class="table-title">所要時間</td>
+                                  <td class="table-detail"><%= @listing.plan_time %>時間</td>
+                              </tr>
+                              <tr>
+                                  <td class="table-title">私ができること、できないこと</td>
+                                  <td class="table-detail"><%= @listing.capacity %></td>
+                              </tr>
+                              <tr>
+                                  <td class="table-title">キャンセルポリシー</td>
+                                  <td class="table-detail"><%= @listing.cancel_policy %>時間</td>
+                              </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <h4><span class="title-line"><%= fa_icon "plane", text: "待ち合わせ場所", left: true %></span></h4>
+                    <div id="map"></div>
+                    <div class="self-intro">
+                        <h4><span class="title-line"><%= fa_icon "plane", text: "自己紹介", left: true %></span></h4>
+                        <div class="row">
+                            <div class="col-sm-2 hidden-xs">
+
+                            </div>
+                            <div class="col-sm-6 hidden-xs">
+                                <p class="arrow_box">私はこんな人です。</p>
+                            </div>
+                        </div>
+                        <div class="intro-content">
+                            <h5><strong>私が得意な話</strong></h5>
+                            <p class="self-detail"><%= @listing.favorite_topic %></p>
+                            <h5><strong>私の自慢</strong></h5>
+                            <p class="self-detail"><%= @listing.myprofile %></p>
+                            <h5><strong>私が目指すもの</strong></h5>
+                            <p class="self-detail"><%= @listing.my_goal %></p>
+                        </div><!--intro-content-->
+                    </div><!--self-intro-->
+                </div><!--self-info-part-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	$(function(){
+		$(".jumbotron").removeClass("navbar-devise");
+		$(".jumbotron").addClass("navbar-default");
+	});
+</script>
+
+<script type="text/javascript">
+$('.bxslider').bxSlider({
+  mode: 'fade',
+  auto: true,
+  autoControls: true,
+  pause: 5000
+});
+</script>

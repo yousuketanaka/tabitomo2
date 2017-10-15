@@ -1,0 +1,49 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plan_title: MyString
+  plan_detail: MyText
+  shop_info: MyString
+  acceptable: 1
+  plan_time: 1
+  guide_detail: MyText
+  cancel_policy: MyText
+  capacity: MyText
+  nationality: MyString
+  language: MyString
+  language_level: MyString
+  age: 1
+  sex: MyString
+  price_setting: 1
+  favorite_topic: MyText
+  residentcountry: MyString
+  residentcity: MyString
+  latitude: 1.5
+  longitude: 1.5
+  my_goal: MyText
+  address: MyString
+  myprofile: MyText
+
+two:
+  plan_title: MyString
+  plan_detail: MyText
+  shop_info: MyString
+  acceptable: 1
+  plan_time: 1
+  guide_detail: MyText
+  cancel_policy: MyText
+  capacity: MyText
+  nationality: MyString
+  language: MyString
+  language_level: MyString
+  age: 1
+  sex: MyString
+  price_setting: 1
+  favorite_topic: MyText
+  residentcountry: MyString
+  residentcity: MyString
+  latitude: 1.5
+  longitude: 1.5
+  my_goal: MyText
+  address: MyString
+  myprofile: MyText

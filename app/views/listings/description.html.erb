@@ -1,0 +1,136 @@
+<%= render 'partial/navbar' %>
+<div class="container">
+    <div class="row row-space">
+	    <div class="col-md-3">
+	        <!-- vertical-navbar -->
+	        <%= render 'partial/verticalnavbar'%>
+	    </div>
+	    <div class="col-md-9">
+	        <div class="panel panel-info">
+	            <div class="panel-heading">
+	                <div class="text-center">
+	                    <span style="font-size:24px;">プラン情報の作成</span>
+	                </div>
+	            </div>
+
+	            <div class="panel-body">
+
+	                <%= form_for @listing do |f| %>
+	                    <hr>
+					    <div class="form-group">
+　　　　　　　　　　　　　　　　<p><span class="glyphicon glyphicon-triangle-right"><strong>私ができるサービス</strong></p>
+							<p><label><%= f.radio_button :service_type, "カフェトーク" %>カフェトーク</label></p>
+							<p><label><%= f.radio_button :service_type, "一緒にお食事" %>一緒にお食事</label></p>
+							<p><label><%= f.radio_button :service_type, "一緒に観光" %>一緒に観光</label></p>
+						</div>
+	                    <hr>
+						<div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <label><span class="glyphicon glyphicon-tags" aria-hidden="true"></span>プランのタイトル</label>
+	                                <%= f.text_field :plan_title, placeholder: "(例) ホーチミンの代表的な料理フォーを一緒に食べましょう。", class: "form-control", required: "true" %>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <label><span class="glyphicon glyphicon-tags" aria-hidden="true"></span>プラン詳細</label>
+	                                <%= f.text_area :plan_detail, rows: 8, placeholder: "お客さんがあなたとの時間をイメージできるように書きましょう。", class: "form-control", required: "true" %>
+	                            </div>
+
+	                            <div class="form-group">
+	                                <label>連れて行きたいお店の情報(HPなど)があれば貼り付けてください。</label>
+	                                <%= f.text_field :shop_info, placeholder: "お店のURL: http//recommendation_shop.com", class: "form-control", required: "true" %>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="row">
+							<div class="col-md-12 select">
+								<div class="form-group">
+									<label><span class="glyphicon glyphicon-tags" aria-hidden="true"></span>最大引き受け人数</label><br>
+									<%= f.select :acceptable, (1..5), {prompt:"1回あたりに引き受けられる人数を選んでください。"}, {required: 'true', autofocus: 'true', class: "form-control" } %>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12 select">
+								<div class="form-group">
+									<label><span class="glyphicon glyphicon-tags" aria-hidden="true"></span>プランに必要な時間</label><br>
+									<%= f.select :plan_time, (1..8), {prompt:"プランに必要な時間を選んでください。"}, {required: 'true', autofocus: 'true', class: "form-control" } %>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <label>※しっかりガイドプランを選択した人のみ、ガイド先や時間を詳しく書いてください。</label>
+	                                <p><strong>ガイド詳細</strong></p>
+	                                <%= f.text_area :guide_detail, rows: 10, placeholder: "おすすめの訪問場所/交通手段/所要時間/アクティビティの内容などを詳しく書いてください。", class: "form-control" %>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <label><span class="glyphicon glyphicon-tags" aria-hidden="true"></span>キャンセルポリシー</label>
+	                                <%= f.text_area :cancel_policy, rows: 5, placeholder: "キャンセルする場合の注意点を書いてください。", class: "form-control" %>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <label><span class="glyphicon glyphicon-tags" aria-hidden="true"></span>私ができること、できないこと</label>
+	                                <%= f.text_area :capacity, rows: 8, placeholder: "ここには、お客様のためにできること、できないことを書いてください。", class: "form-control" %>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <hr>
+	                    <h4 class="text-center"><span class="basicinfo-title">あなたのことを知ってもらいましょう。</span></h4>
+	                    <hr>
+
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <label><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>私のプロフィール</label>
+	                                <%= f.text_area :myprofile, rows: 8, placeholder: "あなたのプロフィールを書いてください。", class: "form-control", required: "true" %>
+	                            </div>
+	                        </div>
+	                    </div>
+						<hr>
+
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <label><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>私が得意な話</label>
+	                                <%= f.text_area :favorite_topic, rows: 8, placeholder: "得意な話があれば、教えてください。", class: "form-control", required: "true" %>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <label><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>私が目指すもの</label>
+	                                <%= f.text_area :my_goal, rows: 8, placeholder: "あなたが今目指しているものを教えてください。", class: "form-control", required: "true" %>
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="actions">
+	                        <%= f.submit "更新", class: "btn btn-danger" %>
+	                    </div>
+	                <% end %>
+	            </div>
+	        </div>
+	    </div>
+    </div> <!-- End of container -->
+</div>

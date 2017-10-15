@@ -1,0 +1,38 @@
+<%= render 'partial/navbar' %>
+
+<div class="container">
+	<div class="row row-space">
+	    <div class="col-md-10 col-md-offset-1">
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <div class="text-center">
+	                    <span style="font-size:18px;">掲載一覧</span>
+	                </div>
+	            </div>
+	            <ul class="ul-unstyled">
+	                <% @listings.each do |listing| %>
+	                    <li class="panel-body">
+	                        <div class="row-table">
+	                            <div class="col-sm-2 col-md-2">
+	                                <div class="panel-list-img text-center">
+	                                    <%= image_tag listing.photos[0].image.url(:medium) if listing.photos.length > 0  %>    
+	                                </div> 
+	                            </div>
+
+	                            <div class="col-sm-7 col-md-7">
+	                                <span class="listing-title"><%= listing.service_type %></span>
+	                                <p>作成日:<%= listing.created_at %></p>
+	                                <p>更新日:<%= listing.updated_at %></p>
+	                            </div>
+	                            <div class="col-sm-3 col-md-3">
+	                                <%= link_to "残り5ステップ", manage_listing_basics_path(listing), class: "btn btn-primary pull-right" %>
+	                            </div>
+	                        </div>
+	                    </li>
+	                    <hr>
+	                <% end %>
+	            </ul>
+	        </div>
+	    </div>
+    </div>
+</div>
