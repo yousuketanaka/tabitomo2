@@ -143,7 +143,7 @@ $(function(){
       $.each(data,function(index,element){
         d = new Date(index.start_date);
         disabledDates.push($.datepicker.formatDate('yy/mm/dd', d));
-        // for(var d = new Date(index.start_date); d =< d.setMonth(d.getMonth() + 3); d.setDate(d.getDate() + 1;)){
+        // for(var d = new Date(index.start_date); d =< d.setMonth(d.getMonth() + n); d.setDate(d.getDate() + 1;)){
         //    disabledDates.push($.datepicker.formatDate('yy/mm/dd', d));
         // }
       });
@@ -154,8 +154,8 @@ $(function(){
           minDate: 0,
           beforeshowday: disable,
           onSelect: function(selected){
-          $('#datetimepicker1').datepicker("option","minDate",selected);
-          $('#datetimepicker1').attr('disabled',false);
+             $('#datetimepicker1').datepicker("option","minDate",selected);
+          }
        }); //.datepicker
     } //success
   }); //$.ajax
