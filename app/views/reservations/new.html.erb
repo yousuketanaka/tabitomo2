@@ -113,6 +113,9 @@
 $(function(){
   //日付について、それが選択不可能なものかを決める関数
   // inArray()について:dmyがdisabledDates配列になければ-1を返す
+    // 不可能な日付の配列
+  disabledDates = [];
+
   function disable(date){
     var y = date.getFullYear();
     var m = date.getMonth();
@@ -125,8 +128,6 @@ $(function(){
     }
   }
 
-  // 不可能な日付の配列
-  disabledDates = [];
   //事前にdatepickerに選択不可能な日付をセットするajax
   $.ajax({
     url: '/setdate',
@@ -151,7 +152,10 @@ $(function(){
           dateFormat: "yy/mm/dd",
           maxDate: "+2m",
           minDate: 0,
-          beforeshowday: disable
+          beforeshowday: disable,
+          onSelect: function(selected){
+          $('#datetimepicker1').datepicker("option","minDate",selected);
+          $('#datetimepicker1').attr('disabled',false);
        }); //.datepicker
     } //success
   }); //$.ajax
