@@ -4,6 +4,8 @@
 @import "font-awesome";
 @import "dropzone/dropzone";
 @import "bxslider";
+@import "jquery-ui/datepicker";
+@import "jquery-bootstrap-datepicker";
 
 body {
     color: #222;
@@ -456,10 +458,44 @@ html, body {
     margin-bottom: 0px;
 }
 
+// showページの近いリスティングのcss
+.panel-listing img {
+  width: 100%;
+  height: 180px;
+}
 
 
 
+//予約画面
+.service_title{
+  color: #a22041;
+}
 
+.custab > tbody > tr > td{
+  padding: 20px!important;
+}
+
+.custab{
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 5% 0;
+  box-shadow: 3px 3px 2px #ccc;
+  transition: 0.5s;
+}
+
+.custyle{
+  margin: 0 auto;
+}
+
+.custab:hover{
+  box-shadow: 3px 3px 0px transparent;
+  transition: 0.5s;
+}
+
+.confirmation-btn a{
+  color: #fff;
+  text-decoration: none;
+}
 
 
 

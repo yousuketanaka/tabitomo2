@@ -1,0 +1,106 @@
+<%= render 'partial/navbar' %>
+<div class="container">
+    <div class="row row-space">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-success">
+	            <div class="panel-heading">
+	                  <div class="text-center">
+	                      <span style="font-size:24px;">予約の確認</span>
+	                  </div>
+	            </div>
+
+	            <div class="panel-body">
+				    <div class="row col-md-12 custyle">
+					    <table class="table table-striped custab">
+					    <thead>
+					        <tr>
+					            <th>No</th>
+					            <th>項目</th>
+					            <th>記載内容</th>
+					        </tr>
+					    </thead>
+					            <tr>
+					                <td>1</td>
+					                <td>予約者のお名前</td>
+					                <td><%= current_user.name %></td>
+					            </tr>
+					            <tr>
+					                <td>2</td>
+					                <td>予約者のEmail</td>
+					                <td><%= current_user.email %></td>
+					            </tr>
+					            <tr>
+					                <td>3</td>
+					                <td>予約者の連絡先</td>
+					                <td><%= current_user.phone_number %></td>
+					            </tr>
+					            <tr>
+					                <td>4</td>
+					                <td>サービス内容</td>
+					                <td><%= @listing.service_type %></td>
+					            </tr>
+					            <tr>
+					                <td>5</td>
+					                <td>希望日程</td>
+					                <td><%= @reservation.start_date.strftime "%Y/%m/%d" %></td>
+					            </tr>
+					            <tr>
+					                <td>6</td>
+					                <td>希望時間</td>
+					                <td><%= @reservation.reservation_time %></td>
+					            </tr>
+					            <tr>
+					                <td>7</td>
+					                <td>サービス提供者へのご質問/ご要望</td>
+					                <td><%= @reservation.reservation_message %></td>
+					            </tr>
+					            <tr>
+					                <td>8</td>
+					                <td>ご請求金額</td>
+					                <td style="font-size:25px;color:#ee827c;">
+					                   <%= @listing.price_setting.to_s(:delimited) %>円
+					                </td>
+					            </tr>
+					    </table>
+				    </div>
+				    <div class="row confirmation-btn">
+				    	<div class="col-md-6">
+				    	    <button type="button" class="btn btn-warning btn-block">
+				    	         <%= link_to "予約を変更する。", edit_listing_reservation_path(@listing, @reservation) %>
+				    	    </button>
+				    	</div>
+				    	<div class="col-md-6">
+				    		<button type="button" class="btn btn-info btn-block fix_scheducel"><%= link_to "予約を確定する。" %></button>
+				    	</div>
+				    </div>
+	            </div>
+            </div>
+      　</div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $("#datetimepicker1").datepicker({
+          dateFormat: "yy/mm/dd",
+          monthNames: [ "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月" ],
+          maxDate: "+2m",
+          minDate: 0,
+          showOn: "both"
+        });
+    });
+</script>
+
+<script>
+  $(".fix_scheducel").on("click", function(){
+    $.ajax
+    type: "GET"
+    url: 
+    success: (data)
+      
+    return;
+  return;
+});
+</script>
+
+

@@ -24,7 +24,8 @@ gem 'country_select'
 gem "paperclip", "~> 5.0.0"
 gem 'dropzonejs-rails'
 gem 'bxslider-rails'
-
+gem 'geocoder'
+gem 'jquery-ui-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

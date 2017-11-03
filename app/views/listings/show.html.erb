@@ -54,7 +54,9 @@
                         </div>
 
                         <div class="panel-body panel-real">
-
+                          <%= link_to new_listing_reservation_path(@listing) do %>
+                            <button type="button" class="btn btn-info" style="width:100%;">予約画面へ進む</button>
+                          <% end %>
                         </div>
                     </div>
                 </div><!--予約フォーム col-md-3-->
@@ -136,6 +138,41 @@
                         </div><!--intro-content-->
                     </div><!--self-intro-->
                 </div><!--self-info-part-->
+
+
+                <!-- 近くのリスティング    -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                        <h4 class="row-space-3">その他のリスティング</h4>
+                        <hr>
+                        <% for listing in @listing.nearbys(10) %>
+                            <div class="col-md-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading panel-listing text-center" style="padding: 0;">
+                                        <%= link_to(listing) do %>
+                                            <%= image_tag listing.photos[0].image.url(:medium) if listing.photos.length > 0 %>
+                                        <% end %>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-8 col-xs-8">
+                                                <%= link_to listing.plan_title, listing %><br>
+                                            </div>
+                                            <div class="col-md-3 col-xs-3">
+
+                                            </div>
+                                            <div class="price-card">
+                                                <%= listing.price_setting %>円
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -155,4 +192,22 @@ $('.bxslider').bxSlider({
   autoControls: true,
   pause: 5000
 });
+</script>
+
+<script type="text/javascript">
+  function initMap() {
+    var uluru = {lat: <%=@listing.latitude %>, lng: <%=@listing.longitude %>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: uluru
+    });
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+  }
+</script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUH0GAPxrsmJwe--8-vQZcokwg2N7GX9o&callback=initMap">
 </script>

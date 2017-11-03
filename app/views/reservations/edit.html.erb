@@ -1,0 +1,119 @@
+<%= render 'partial/navbar' %>
+<div class="container">
+    <div class="row row-space">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                  <div class="text-center">
+                      <span style="font-size:24px;">予約編集ページ</span>
+                  </div>
+              </div>
+
+              <div class="panel-body">
+                  <!-- ここからフォーム -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h5>《サービス内容》</h5>
+                      <p class="service_title alert alert-warning" role="alert">選択されたサービス名: <strong><%= @listing.service_type %></strong></p>
+                    </div>
+                  </div>
+                  <br>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h5>《サービス料金》</h5>
+                      <p class="alert alert-warning" role="alert"><%= @listing.price_setting %>円</p>
+                    </div>
+                  </div>
+                  <br>
+
+                  <%= form_for [@listing, @reservation], {method: :patch} do |f| %>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h5>《希望日程を指定》</h5>
+                        <div class="form-group">
+                          <div class="alert alert-warning" role="alert">
+                              <div class='input-group date'>
+                                  <%= f.text_field :start_date, class: 'form-control', id:"datetimepicker1", placeholder: "年/月/日" %>
+                                  <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar">
+                                      </span>
+                                  </span>
+                              </div>
+                          </div>
+                        </div>
+                      </div> <!-- col-md-6 -->
+
+                      <div class="col-md-6">
+                        <h5>《希望時間を指定》</h5>
+                        <div class="form-group">
+                          <div class="alert alert-warning" role="alert">
+                                <div class='input-group time'>
+                                  <%= f.select :reservation_time, [["09:00","09:00"], ["09:30","09:30"], ["10:00","10:00"], ["10:30","10:30"],["11:00","11:00"], ["11:30","11:30"], ["12:00","12:00"], ["12:30","12:30"], ["13:00","13:00"], ["13:30","13:30"], ["14:00","14:00"], ["14:30","14:30"], ["15:00","15:00"], ["15:30","15:30"], ["16:00","16:00"], ["16:30","16:30"], ["17:00","17:00"], ["17:30","17:30"], ["18:00","18:00"], ["18:30","18:30"], ["19:00","19:00"], ["19:30","19:30"], ["20:00","20:00"], ["20:30","20:30"], ["21:00","21:00"]], {prompt:"選択してください"}, {autofocus: 'true', class:'select-time form-control', id:'datetimepicker2'} %>
+                                  <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-time"></span>
+                                  </span>
+                                </div>
+                          </div>
+                        </div>
+                      </div> <!-- col-md-6 -->
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h5>《予約の際、以下のことにお気をつけください。》</h5>
+                        <div class="service_title alert alert-warning" role="alert">
+                          <ul>
+                            <li>※ 複数日のご予約はできません。連続で複数日をご予約の場合は別途日程を選択しご予約ください。</li>
+                            <li>※ なるべく3日後〜1週間前後の余裕をもった日時でお申込みください。</li>
+                            <li>※ 当日、突然のキャンセル、時間変更はお控えください。</li>
+                            <li>※ 過度時間の延長があった場合は、別途、その時間分ご予約をお願いしております。</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>サービス提供者へのご要望があれば、書いてください。</label>
+                          <%= f.text_area :reservation_message, rows: 8, placeholder: "質問、確認事項があれば書いてください。", class: "form-control" %>
+                        </div>
+
+                        <div class="service_title alert alert-warning" role="alert">
+                          <ul>
+                            <li>※ 目的から外れた、過度の要求やお願いはお控えください。</li>
+                            <li>※ 夜のお店の紹介のお願い、同行などの依頼は本サイトの趣旨から外れます。お控えください。</li>
+                            <li>※ 公序良俗に反する依頼はお控えください。</li>
+                            <li>※ サービス提供者が迷惑、危険に感じる可能性がある依頼はお控えください。</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+
+                    <div class="actions">
+                        <%= f.submit "予約確定画面へ進む", class: "btn btn-info btn-block" %>
+                    </div>
+
+                  <% end %>
+
+                  <br>
+              </div>
+          </div>
+      　</div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $("#datetimepicker1").datepicker({
+          dateFormat: "yy/mm/dd",
+          monthNames: [ "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月" ],
+          dayNames: [ "日", "月", "火", "水", "木", "金", "土" ],
+          maxDate: "+2m",
+          minDate: 0,
+        });
+    });
+</script>

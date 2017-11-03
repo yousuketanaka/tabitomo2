@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  listing: one
+  start_date: 2017-10-21 08:24:51
+  price_setting: 1
+  total_price: 1
+
+two:
+  user: two
+  listing: two
+  start_date: 2017-10-21 08:24:51
+  price_setting: 1
+  total_price: 1

@@ -1,0 +1,63 @@
+<%= render 'partial/navbar' %>
+<div class="container">
+    <div class="row row-space">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-success">
+	            <div class="panel-heading">
+	                  <div class="text-center">
+	                      <span style="font-size:24px;">予約の確認</span>
+	                  </div>
+	            </div>
+
+	            <div class="panel-body">
+				    <div class="row col-md-12 custyle">
+					    <table class="table table-striped custab">
+					    <thead>
+					        <tr>
+					            <th>No</th>
+					            <th>項目</th>
+					            <th>記載内容</th>
+					        </tr>
+					    </thead>
+					            <tr>
+					                <td>1</td>
+					                <td>News</td>
+					                <td>News Cate</td>
+					            </tr>
+					            <tr>
+					                <td>2</td>
+					                <td>Products</td>
+					                <td>Main Products</td>
+					            </tr>
+					            <tr>
+					                <td>3</td>
+					                <td>Blogs</td>
+					                <td>Parent Blogs</td>
+					            </tr>
+					    </table>
+				    </div>
+				    <div class="row actions">
+				    	<div class="col-md-6">
+				    	    <button type="button" class="btn btn-warning btn-block"><%= link_to "予約を変更する。", listing_reservation_path %></button>
+				    	</div>
+				    	<div class="col-md-6">
+				    		<button type="button" class="btn btn-info btn-block"><%= link_to "予約を確定する。"%></button>
+				    	</div>
+				    </div>
+	            </div>
+            </div>
+      　</div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $("#datetimepicker1").datepicker({
+          dateFormat: "yy/mm/dd",
+          monthNames: [ "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月" ],
+          maxDate: "+2m",
+          minDate: 0,
+          showOn: "both"
+        });
+    });
+</script>

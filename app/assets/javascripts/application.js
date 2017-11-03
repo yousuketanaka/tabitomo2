@@ -16,5 +16,6 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//= require jquery-ui/widgets/datepicker
 //= require toastr
 //= require bxslider
