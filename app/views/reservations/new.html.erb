@@ -1,3 +1,5 @@
+require "pry"
+
 <%= render 'partial/navbar' %>
 <div class="container">
     <div class="row row-space">
@@ -95,7 +97,8 @@
                     <br>
 
                     <div class="actions">
-                        <%= f.submit "予約確認画面へ進む", class: "btn btn-info btn-block" %>
+                        <%= f.submit "予約確認画面へ進む", class: "btn btn-info btn-block" %><br>
+                        <span>※現時点で、金額の請求はありません。</span>
                     </div>
 
                   <% end %>
@@ -111,53 +114,60 @@
 
 <script>
 $(function(){
-  //日付について、それが選択不可能なものかを決める関数
-  // inArray()について:dmyがdisabledDates配列になければ-1を返す
-    // 不可能な日付の配列
-  disabledDates = [];
 
-  function disable(date){
-    var y = date.getFullYear();
-    var m = date.getMonth();
-    var d = date.getDate();
-    //$.inArray()は、第一引数に渡した値が、配列にあればそのインデックスを渡す。値が配列中に見つからない場合は、-1を返します。
-    //ここでは、dmyにdisableDatesが含まれていないなら-1を返す。
-    var ymd = y + "/" + m + "/" + d;
-    if ($.inArray(ymd,disabledDates) == -1){
-        return [true];
-    }
-  }
+  //①予約できない日を配列で確保
+  var holidays = [];
 
-  //事前にdatepickerに選択不可能な日付をセットするajax
   $.ajax({
+    type: 'GET',
     url: '/setdate',
-    // '/select'にアクセスし、listing_idのidをjson形式で返して、function(data)に格納する。
+    // this data is data for sending to url
     data: {'listing_id': <%= @listing.id %>},
     dataType: 'json',
-    // callback argument: data is the response data
-    // 下のurlを参考
-    // http://stackoverflow.com/questions/4345045/javascript-loop-between-date-ranges
-    // disabledDates[]にすでに予約されている日付を追加していく
     success: function(data){
-      //以下のdataには、'listing_id'が配列の形で入っている。
-      $.each(data,function(index,element){
-        d = new Date(index.start_date);
-        disabledDates.push($.datepicker.formatDate('yy/mm/dd', d));
-        // for(var d = new Date(index.start_date); d =< d.setMonth(d.getMonth() + n); d.setDate(d.getDate() + 1;)){
-        //    disabledDates.push($.datepicker.formatDate('yy/mm/dd', d));
-        // }
+      $.each(data,function(index,val){
+      　var d = new Date(val.start_date);
+      　holidays.push($.datepicker.formatDate("yy-mm-dd",d));
       });
-      // start_date欄がクリックされた時の処理
-      $("#datetimepicker1").datepicker({
-          dateFormat: "yy/mm/dd",
-          maxDate: "+2m",
-          minDate: 0,
-          beforeshowday: disable,
-          onSelect: function(selected){
-             $('#datetimepicker1').datepicker("option","minDate",selected);
-          }
-       }); //.datepicker
-    } //success
-  }); //$.ajax
+    }
+  });
+
+  $("#datetimepicker1").datepicker({
+    dateFormat: "yy/mm/dd",
+    maxDate: "+2m",
+    minDate: 0,
+    beforeShowDay: function(date) {
+    // 予約日の判定
+    for (var i = 0; i < holidays.length; i++) {
+        var htime = Date.parse(holidays[i]);    // 祝日を 'YYYY-MM-DD' から time へ変換
+        var holiday = new Date();
+        holiday.setTime(htime);                 // 上記 time を Date へ設定
+
+        // 祝日
+        if (holiday.getYear() == date.getYear() &&
+            holiday.getMonth() == date.getMonth() &&
+            holiday.getDate() == date.getDate()) {
+            return [false, 'holiday'];
+        }
+    }
+    // 予約日以外
+    return [true, ''];
+    }
+  });
+
+
 });
 </script>
+
+
+
+
+
+①登録した返す
+②@@日大丈夫か、返す
+
+①最初は参照から始まる。
+コントローラーに飛ばし、reservationを返す。ダメな日ずけを返してあげる。
+
+②
+日ずけを選択して、OKトシタトキニ、DBに登録される。

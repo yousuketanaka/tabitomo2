@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get "/listings/:listing_id/reservations" => "reservations#create"
 
   get "/setdate" => "reservations#setdate"
+  get "/reservations" => "reservations#index"
 
   get 'manage-listing/:id/basics' => 'listings#basics', as: 'manage_listing_basics'
   get "manage-listing/:id/description" => "listings#description", as:"manage_listing_description"

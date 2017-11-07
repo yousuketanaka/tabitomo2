@@ -54,6 +54,8 @@ class ListingsController < ApplicationController
   end
 
   def calendar
+    @lisitng = Listing.find(params[:id])
+    @reservation = current_user.reservations.build
   end
 
   def bankaccount

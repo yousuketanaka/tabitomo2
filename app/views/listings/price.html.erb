@@ -23,7 +23,17 @@
                             <%= f.text_field :price_setting, placeholder: "例: 3,000", class: "form-control", required: "true" %>
                           </div>
                         </div>
-                        <span class="glyphicon glyphicon-chevron-right"></span><a class="warning" href="http://ja.exchange-rates.org/">自国通貨に計算し直す場合には、こちらのコンバーターをご利用ください。</a>
+                        <div class="price-attention alert alert-warning" role="alert">
+                          <ul>
+                            <li><span class="glyphicon glyphicon-chevron-right"></span>1時間10USD ≒ 240,000VND ≒ 1,000円以上で金額を入れてください。</li>
+                            <li><span class="glyphicon glyphicon-chevron-right"></span>時間に応じて金額を計算してください。(例)2h ✖️ 1,000円/h = 2,000円</li>
+                            <li><span class="glyphicon glyphicon-chevron-right"></span>設定金額の20%を手数料としていただきます。</li>
+                            <li><span class="glyphicon glyphicon-chevron-right"></span>お客さんが日本人ですので、日本の通貨(円)
+                            で表示するようにしてください。</li>
+                            <li><span class="glyphicon glyphicon-chevron-right"></span><a class="warning" href="http://ja.exchange-rates.org/">自国通貨に計算し直す場合には、こちらのコンバーターをご利用ください。</a></li>
+                          </ul>
+                        </div>
+
                         <div class="actions" style="margin-top:30px;">
                             <%= f.submit "更新", class: "btn btn-danger" %>
                         </div>

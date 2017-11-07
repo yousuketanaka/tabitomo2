@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171021120254) do
+ActiveRecord::Schema.define(version: 20171105153956) do
 
   create_table "listings", force: :cascade do |t|
     t.string   "plan_title"
@@ -87,6 +87,11 @@ ActiveRecord::Schema.define(version: 20171021120254) do
     t.string   "name"
     t.string   "phone_number"
     t.string   "description"
+    t.string   "publishable_key"
+    t.string   "secret_key"
+    t.string   "stripe_user_id"
+    t.string   "currency"
+    t.string   "stripe_account_type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

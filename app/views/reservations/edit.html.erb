@@ -94,7 +94,8 @@
                     <br>
 
                     <div class="actions">
-                        <%= f.submit "予約確定画面へ進む", class: "btn btn-info btn-block" %>
+                        <%= f.submit "予約確定画面へ進む", class: "btn btn-info btn-block" %><br>
+                        <span>※現時点で、金額<%= @listing.price_setting %>円の請求はありません。</span>
                     </div>
 
                   <% end %>

@@ -26,6 +26,10 @@ gem 'dropzonejs-rails'
 gem 'bxslider-rails'
 gem 'geocoder'
 gem 'jquery-ui-rails'
+gem 'pry-rails', '~> 0.3.4'
+gem 'pry-byebug'
+gem 'pry-doc'
+gem 'pry-stack_explorer' 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
