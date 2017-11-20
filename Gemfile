@@ -26,10 +26,7 @@ gem 'dropzonejs-rails'
 gem 'bxslider-rails'
 gem 'geocoder'
 gem 'jquery-ui-rails'
-gem 'pry-rails', '~> 0.3.4'
-gem 'pry-byebug'
-gem 'pry-doc'
-gem 'pry-stack_explorer' 
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -46,6 +43,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry-rails', '~> 0.3.4'
+  gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer' 
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

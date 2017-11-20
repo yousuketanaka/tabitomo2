@@ -9,7 +9,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="text-center">
-            <span style="font-size:24px;">日程管理</span>
+            <span style="font-size:24px;">スケジュール管理</span>
 
           </div>
         </div>
@@ -30,7 +30,7 @@
 
             <!-- 隠し要素として"listing_id"をおくる -->
             <%= f.hidden_field :listing_id, value: @listing.id %>
-            <%= f.hidden_field :selectedDates, value: "",id:"selectedDates" %>
+            <%= f.hidden_field :selectedDates, value: "", id:"selectedDates" %>
 
             <div class="actions">
               <%= f.submit "更新", class: "btn btn-danger" %>
@@ -58,22 +58,23 @@ disabledDates = [];
 selectedDates = [];
 
 function addDate(date) {
+  // dateの値がselectedDatesの中に見つからない場合は-1を返す（0以下となる）
   if ($.inArray(date, selectedDates) < 0) {
     selectedDates.push(date);
   }
 }
 
 function removeDate(index){
-  //splice(削除開始位置,削除する要素数)
+  //splice(削除開始位置@@番目,削除する要素数)
   selectedDates.splice(index,1);
 }
 
 // 選択された日付がすでに"selectedDates"にあれば、削除。なければ追加
 function addOrRemoveDate(date) {
     var index = jQuery.inArray(date, selectedDates);
-    if (index >= 0) 
+    if (index >= 0)
       removeDate(index);
-    else 
+    else
       addDate(date);
 }
 
@@ -104,16 +105,22 @@ $(function () {
     // callback argument: data is the response data
     success: function(data){
 
-      $.each(data,function(arrID,arrValue){
-        //自分で予約した日付"selectedDates[]"と他人が予約した日付"disabledDates[]"をわけてpushしなきゃいけない
-        var d = new Date(arrValue.start_date);
-        // 自分で予約した場合の日付
-        if(arrValue.user_id == <%= current_user.id %>){
-          selectedDates.push($.datepicker.formatDate('yy-mm-dd',d));
-          $('#selectedDates').val(selectedDates);
-        }else{
-          disabledDates.push($.datepicker.formatDate('yy-mm-dd',d));
+      $.each(data,function(index,value){
+
+        for(var i = 0; i <= value.length; i++){
+          var day = new Date(value.start_date);
+          if(value.user_id == <%= current_user.id %>){
+            selectedDates.push($.datepicker.formatDate('yy/mm/dd',day));
+            $('#selectedDates').val(selectedDates);
+          }else{
+            disabledDates.push($.datepicker.formatDate('yy/mm/dd',day));
+          }
         }
+
+        //自分で予約した日付"selectedDates[]"と他人が予約した日付"disabledDates[]"をわけてpushしなきゃいけない
+
+        // 自分で予約した場合の日付
+
       });
 
       $("#datetimepicker1").datepicker({

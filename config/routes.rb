@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :reservations, only: [:new, :create, :show, :edit, :update]
   end
 
-  get "/listings/:listing_id/reservations" => "reservations#create"
+  # get "/listings/:listing_id/reservations/:id" => "reservations#create"
 
   get "/setdate" => "reservations#setdate"
   get "/reservations" => "reservations#index"

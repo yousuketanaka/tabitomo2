@@ -1,5 +1,3 @@
-require "pry"
-
 <%= render 'partial/navbar' %>
 <div class="container">
     <div class="row row-space">
@@ -37,7 +35,7 @@ require "pry"
                         <div class="form-group">
                           <div class="alert alert-warning" role="alert">
                               <div class='input-group date'>
-                                  <%= f.text_field :start_date, class: 'form-control', id:"datetimepicker1", placeholder: "年/月/日" %>
+                                  <%= f.text_field :start_date, class: 'form-control', id:"datetimepicker1", placeholder: "選択してください" %>
                                   <span class="input-group-addon">
                                       <span class="glyphicon glyphicon-calendar">
                                       </span>
@@ -100,7 +98,6 @@ require "pry"
                         <%= f.submit "予約確認画面へ進む", class: "btn btn-info btn-block" %><br>
                         <span>※現時点で、金額の請求はありません。</span>
                     </div>
-
                   <% end %>
 
                   <br>
@@ -116,22 +113,25 @@ require "pry"
 $(function(){
 
   //①予約できない日を配列で確保
-  var holidays = [];
-
-  $.ajax({
-    type: 'GET',
-    url: '/setdate',
-    // this data is data for sending to url
-    data: {'listing_id': <%= @listing.id %>},
-    dataType: 'json',
-    success: function(data){
-      $.each(data,function(index,val){
-      　var d = new Date(val.start_date);
-      　holidays.push($.datepicker.formatDate("yy-mm-dd",d));
-      });
-    }
+  var holidays = [];  //サンプルの値は[2017/11/25,2017/11/26,2017/11/27];
+  var unavailableDay = <%= @bookings %>;
+　
+  $.each(unavailableDay,function(index,value){
+      var day = new Date(value.start_date);
+      holidays.push($.datepicker.formatDate("yy/mm/dd",day));
   });
+  console.log(holidays);
 
+
+
+  // $.each(data,function(objID,objValue){
+  //   for(var i = 0; i <= unavailableDay.length; i++){
+  //     var day = new Date(unavailableDay.start_date);
+  //     holidays.push($.datepicker.formatDate("yy/mm/dd",day));
+  //   }
+  // });
+
+  //②datepickerで予約できない日を除く日程を選択
   $("#datetimepicker1").datepicker({
     dateFormat: "yy/mm/dd",
     maxDate: "+2m",
@@ -155,19 +155,5 @@ $(function(){
     }
   });
 
-
 });
 </script>
-
-
-
-
-
-①登録した返す
-②@@日大丈夫か、返す
-
-①最初は参照から始まる。
-コントローラーに飛ばし、reservationを返す。ダメな日ずけを返してあげる。
-
-②
-日ずけを選択して、OKトシタトキニ、DBに登録される。
